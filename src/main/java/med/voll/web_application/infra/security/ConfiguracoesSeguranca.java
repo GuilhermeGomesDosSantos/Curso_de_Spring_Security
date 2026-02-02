@@ -31,13 +31,17 @@ public class ConfiguracoesSeguranca {
 
     @Bean
     public SecurityFilterChain filtrosSeguranca (HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.authorizeHttpRequests(req -> {
-            req.requestMatchers("/css/**", "/js/**", "/assets/**").permitAll();
-            req.anyRequest().authenticated();
-        })
+        return httpSecurity
+                .authorizeHttpRequests(req -> {
+                        req.requestMatchers("/css/**", "/js/**", "/assets/**").permitAll();
+                        req.anyRequest().authenticated();
+                    })
                 .formLogin(form -> form.loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll())
+                        .defaultSuccessUrl("/")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/logout?logout")
+                        .permitAll())
                 .build();
     }
 }
