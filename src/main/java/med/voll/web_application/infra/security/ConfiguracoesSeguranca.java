@@ -37,11 +37,14 @@ public class ConfiguracoesSeguranca {
                         req.anyRequest().authenticated();
                     })
                 .formLogin(form -> form.loginPage("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/",true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/logout?logout")
                         .permitAll())
+                .rememberMe(rememberMe -> rememberMe.key("123456")
+//                        .alwaysRemember(true)
+                        .tokenValiditySeconds(2592000))
                 .build();
     }
 }
