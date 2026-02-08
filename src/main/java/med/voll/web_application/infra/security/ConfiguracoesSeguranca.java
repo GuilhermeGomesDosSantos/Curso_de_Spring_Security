@@ -16,21 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ConfiguracoesSeguranca {
 
     @Bean
-    public UserDetailsService dadosUsuariosCadastrados(){
-        UserDetails  usuario1 = User.builder()
-                .username("guilherme.santos@email.com")
-                .password("{noop}123456")
-                .build();
-
-        UserDetails usuario2 = User.builder()
-                .username("teste.silva@email.com")
-                .password("{noop}123456")
-                .build();
-
-        return new InMemoryUserDetailsManager(usuario1, usuario2);
-    }
-
-    @Bean
     public SecurityFilterChain filtrosSeguranca (HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(req -> {
